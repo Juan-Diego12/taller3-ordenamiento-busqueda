@@ -23,9 +23,12 @@ java -cp out PruebaRapida 1000          # prueba rápida de los ordenamientos
 
 java -Xmx2g -cp out MedirOrdenamientos  # medición oficial en Java
 python python/medir_ordenamientos.py    # medición oficial en Python
+
+java -Xmx2g -cp out MedirBusquedas      # búsquedas en Java
+python python/medir_busquedas.py        # búsquedas en Python
 ```
 
-Los resultados quedan en `resultados/ordenamiento_java.csv` y `resultados/ordenamiento_python.csv`.
+Los resultados quedan en `resultados/ordenamiento_java.csv`, `resultados/ordenamiento_python.csv`, `resultados/busqueda_java.csv` y `resultados/busqueda_python.csv`.
 
 ## Datos de prueba
 
@@ -68,6 +71,16 @@ tiempo estimado(n nuevo) = tiempo medido(n anterior) × f(n nuevo) / f(n anterio
 - Si la predicción supera 5 minutos, el caso no se ejecuta y se registra como `estimado`.
 - Si ocurre `StackOverflowError` (Java) o `RecursionError` (Python), se registra el error en la columna `observacion` y el tiempo se estima con la misma fórmula. Los tamaños mayores de ese caso también se estiman.
 
+## Medición de las búsquedas
+
+- Se usan los arreglos ascendentes del Punto 1.
+- **Variante `claves`:** para cada n se buscan las 1.000 claves de `claves_busqueda.txt` (500 presentes y 500 ausentes).
+- **Variantes `inicio`, `centro` y `final`:** con n = 1.000.000 se busca 1.000 veces la clave ubicada en la posición 0, n/2 y n − 1.
+- Se mide el tiempo total de las 1.000 búsquedas (5 repeticiones) y se reporta también el promedio por búsqueda en nanosegundos.
+- Java hace un calentamiento de 20 pasadas de las 1.000 búsquedas antes de medir, porque una sola pasada no alcanza para que el JIT compile el método por completo.
+- Antes de medir, y fuera del tiempo, se verifica que cada algoritmo encuentre las claves presentes y retorne −1 para las ausentes.
+- Búsqueda por saltos usa un salto de raíz de n. Búsqueda por interpolación incluye una validación para evitar la división entre cero cuando hay valores repetidos.
+
 ## Fuentes
 
 Implementaciones basadas en GeeksforGeeks (verificar cada enlace antes de la entrega):
@@ -78,3 +91,9 @@ Implementaciones basadas en GeeksforGeeks (verificar cada enlace antes de la ent
 - Heap Sort: https://www.geeksforgeeks.org/heap-sort/
 - Radix Sort: https://www.geeksforgeeks.org/radix-sort/
 - Bucket Sort: https://www.geeksforgeeks.org/bucket-sort-2/
+- Búsqueda Lineal: https://www.geeksforgeeks.org/linear-search/
+- Búsqueda Binaria: https://www.geeksforgeeks.org/binary-search/
+- Búsqueda Ternaria: https://www.geeksforgeeks.org/ternary-search/
+- Búsqueda por Saltos: https://www.geeksforgeeks.org/jump-search/
+- Búsqueda por Interpolación: https://www.geeksforgeeks.org/interpolation-search/
+- Búsqueda Exponencial: https://www.geeksforgeeks.org/exponential-search/
