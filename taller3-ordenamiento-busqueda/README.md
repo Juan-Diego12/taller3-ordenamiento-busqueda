@@ -26,6 +26,9 @@ python python/medir_ordenamientos.py    # medición oficial en Python
 
 java -Xmx2g -cp out MedirBusquedas      # búsquedas en Java
 python python/medir_busquedas.py        # búsquedas en Python
+
+pip install matplotlib
+python python/graficas.py               # gráficas (graficas/) y tablas de apoyo (resultados/tablas.md)
 ```
 
 Los resultados quedan en `resultados/ordenamiento_java.csv`, `resultados/ordenamiento_python.csv`, `resultados/busqueda_java.csv` y `resultados/busqueda_python.csv`.
